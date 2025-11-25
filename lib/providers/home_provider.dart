@@ -8,7 +8,7 @@ class HomeProvider extends ChangeNotifier{
   String title = "Home";
 
   void goToSourcesView(CategoryModel category){
-    homeView = SourcesView();
+    homeView = SourcesView(category: category,);
     title = category.title;
     notifyListeners();
   }
