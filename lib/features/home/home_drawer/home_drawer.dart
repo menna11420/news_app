@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/core/resources/colors_manager.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  const HomeDrawer({super.key,required this.goToCategories});
+  final void Function() goToCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class HomeDrawer extends StatelessWidget {
           ),
           SizedBox(height: 16.h,),
           InkWell(
-            onTap: (){},
+            onTap: (){
+              goToCategories();
+            },
             child: Row(
               children: [
                 Icon(Icons.home_outlined,color: ColorsManager.white,),
