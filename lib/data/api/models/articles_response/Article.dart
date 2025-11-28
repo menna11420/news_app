@@ -9,7 +9,7 @@ class Article {
       this.description, 
       this.url, 
       this.urlToImage, 
-      this.publishedAt, 
+      this.publishedAt,
       this.content,});
 
   Article.fromJson(dynamic json) {
