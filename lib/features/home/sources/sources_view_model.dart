@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/api/api_service.dart';
-import 'package:news_app/api/models/sources_response/Source.dart';
+import 'package:news_app/data/api/api_service.dart';
+import 'package:news_app/data/api/models/sources_response/Source.dart';
 import 'package:news_app/models/category_model.dart';
+import 'package:news_app/repositories/sources_repository.dart';
 
 class SourcesViewModel extends ChangeNotifier{
+  SourcesRepository sourcesRepository;
+  SourcesViewModel({required this.sourcesRepository});
   bool isLoading = false;
   String errorMessage = "";
   List<Source> sources = [];
@@ -11,7 +14,7 @@ class SourcesViewModel extends ChangeNotifier{
   Future<void> loadSources(CategoryModel category)async{
     isLoading = true;
     notifyListeners();
-    var result  = await ApiService.getSources(category);
+    var result  = await sourcesRepository.getSources(category);
     isLoading  = false;
     notifyListeners();
   result.fold((message){

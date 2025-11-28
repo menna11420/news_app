@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app/api/models/articles_response/Article.dart';
-import 'package:news_app/api/models/sources_response/Source.dart';
 import 'package:news_app/core/resources/colors_manager.dart';
+import 'package:news_app/data/api/api_service.dart';
+import 'package:news_app/data/api/models/articles_response/Article.dart';
+import 'package:news_app/data/api/models/sources_response/Source.dart';
+import 'package:news_app/data/data_sources/articles_api_remote_Data_source.dart';
+import 'package:news_app/data/data_sources/sources_api_remote_data_source.dart';
+import 'package:news_app/data/repositories_impl/articles_repository_impl.dart';
+import 'package:news_app/data/repositories_impl/sources_repository_impl.dart';
 import 'package:news_app/features/home/sources/article_item.dart';
 import 'package:news_app/features/home/sources/articles_view_model.dart';
 import 'package:news_app/features/home/sources/sources_view_model.dart';
@@ -31,8 +36,12 @@ class _SourcesViewState extends State<SourcesView> {
   }
 
   void fetchData()async{
-    sourcesViewModel = SourcesViewModel();
-    articlesViewModel = ArticlesViewModel();
+    sourcesViewModel = SourcesViewModel(
+      sourcesRepository: SourcesRepositoryImpl(dataSource: SourcesApiRemoteDataSource(ApiService()))
+    );
+    articlesViewModel = ArticlesViewModel(
+      articlesRepository: ArticlesRepositoryImpl(dataSource: ArticlesApiRemoteDataSource(apiService: ApiService()))
+    );
     await  sourcesViewModel.loadSources(widget.category);
     if(sourcesViewModel.sources.isNotEmpty) {
       articlesViewModel.loadArticles(sourcesViewModel.sources[0]);

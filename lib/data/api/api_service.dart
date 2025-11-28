@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import 'package:news_app/api/models/articles_response/Article.dart';
-import 'package:news_app/api/models/articles_response/ArticlesResponse.dart';
-import 'package:news_app/api/models/sources_response/Source.dart';
-import 'package:news_app/api/models/sources_response/SourcesResponse.dart';
 import 'package:news_app/core/resources/constant_manager.dart';
 import 'package:news_app/models/category_model.dart';
 
-class ApiService {
+import 'models/articles_response/Article.dart';
+import 'models/articles_response/ArticlesResponse.dart';
+import 'models/sources_response/Source.dart';
+import 'models/sources_response/SourcesResponse.dart';
 
-  static Future<Either<String, List<Source>>>getSources(CategoryModel category)async {
+class ApiService {
+  Future<Either<String, List<Source>>>getSources(CategoryModel category)async {
     var url = Uri.https(ApiConstant.baseUrl, ApiConstant.sourcesEndPoint, {
       "apiKey": ApiConstant.apiKey,
       "category": category.id,
@@ -36,9 +36,8 @@ class ApiService {
     }
 
   }
-  
-  
-  static Future<Either<String, List<Article>>> getArticles(Source source,[String? searchKey])async{
+
+  Future<Either<String, List<Article>>> getArticles(Source source,[String? searchKey])async{
     Map<String,dynamic> params = {
       "apiKey":ApiConstant.apiKey,
       "sources":source.id,
