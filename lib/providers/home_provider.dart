@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/categories/categories_view.dart';
 import 'package:news_app/features/home/sources/sources_view.dart';
+import 'package:news_app/features/home/search/search_view.dart';
 import 'package:news_app/models/category_model.dart';
 
 class HomeProvider extends ChangeNotifier{
@@ -15,6 +16,12 @@ class HomeProvider extends ChangeNotifier{
 
   void goToCategoriesView(){
     homeView = CategoriesView();
+    notifyListeners();
+  }
+
+  void goToSearchView() {
+    homeView = const SearchView();
+    title = "Search";
     notifyListeners();
   }
 }

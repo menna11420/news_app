@@ -9,7 +9,7 @@ class ArticlesRepositoryImpl implements ArticlesRepository{
   ArticlesRepositoryImpl({required this.dataSource});
   @override
   Future<Either<String, List<Article>>> getArticles(Source source,[String? searchKey]) {
-    return dataSource.getArticles(source);
+    return dataSource.getArticles(source,searchKey);
   }
 
 }

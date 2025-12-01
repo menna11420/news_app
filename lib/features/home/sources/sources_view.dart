@@ -27,6 +27,7 @@ class SourcesView extends StatefulWidget {
 class _SourcesViewState extends State<SourcesView> {
   late SourcesViewModel sourcesViewModel;
   late ArticlesViewModel articlesViewModel;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -37,10 +38,10 @@ class _SourcesViewState extends State<SourcesView> {
 
   void fetchData()async{
     sourcesViewModel = SourcesViewModel(
-      sourcesRepository: SourcesRepositoryImpl(dataSource: SourcesApiRemoteDataSource(ApiService()))
+        sourcesRepository: SourcesRepositoryImpl(dataSource: SourcesApiRemoteDataSource(ApiService()))
     );
     articlesViewModel = ArticlesViewModel(
-      articlesRepository: ArticlesRepositoryImpl(dataSource: ArticlesApiRemoteDataSource(apiService: ApiService()))
+        articlesRepository: ArticlesRepositoryImpl(dataSource: ArticlesApiRemoteDataSource(apiService: ApiService()))
     );
     await  sourcesViewModel.loadSources(widget.category);
     if(sourcesViewModel.sources.isNotEmpty) {
@@ -69,9 +70,9 @@ class _SourcesViewState extends State<SourcesView> {
                 List<Source> sources = sourcesViewModel.sources ?? [];
                 return DefaultTabController(
                     length: sources.length, child: TabBar(
-                  onTap: (index){
-                    articlesViewModel.loadArticles(sourcesViewModel.sources[index]);
-                  },
+                    onTap: (index){
+                      articlesViewModel.loadArticles(sourcesViewModel.sources[index]);
+                    },
 
                     tabAlignment: TabAlignment.start,
                     isScrollable: true,

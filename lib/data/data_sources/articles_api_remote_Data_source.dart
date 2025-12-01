@@ -8,8 +8,8 @@ class ArticlesApiRemoteDataSource implements ArticlesRemoteDataSource{
   late ApiService apiService;
   ArticlesApiRemoteDataSource({required this.apiService});
   @override
-  Future<Either<String, List<Article>>> getArticles(Source source) {
-    return apiService.getArticles(source);
+  Future<Either<String, List<Article>>> getArticles(Source source, [String? searchKey]) {
+    return apiService.getArticles(source,searchKey);
   }
 
 }
