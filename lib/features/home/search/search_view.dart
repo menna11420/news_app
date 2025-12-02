@@ -141,8 +141,6 @@ class _SearchViewState extends State<SearchView> {
                 children: [
                   const Icon(Icons.search_rounded, color: ColorsManager.white),
                   SizedBox(width: 8.w),
-
-                  /// \u2705 Text Field
                   Expanded(
                     child: TextField(
                       controller: searchController,
@@ -159,18 +157,12 @@ class _SearchViewState extends State<SearchView> {
                         border: InputBorder.none,
                       ),
                       textInputAction: TextInputAction.search,
-
-                      /// \u2705 \u0647\u0646\u0627 \u0628\u0646\u062d\u062f\u0651\u062b \u0627\u0644\u0648\u0627\u062c\u0647\u0629 \u0643\u0644 \u0645\u0627 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u064a\u0643\u062a\u0628
                       onChanged: (_) {
                         setLocalState(() {});
                       },
-
-                      /// \u2705 \u0644\u0645\u0627 \u064a\u062f\u0648\u0633 Enter
                       onSubmitted: (value) {
                         if (sourcesVM.sources.isEmpty) return;
-
                         final currentSource = sourcesVM.sources[0];
-
                         Provider.of<ArticlesViewModel>(context, listen: false)
                             .loadArticles(
                           currentSource,
@@ -179,20 +171,13 @@ class _SearchViewState extends State<SearchView> {
                       },
                     ),
                   ),
-
-                  /// \u2705 \u0632\u0631 X \u064a\u0638\u0647\u0631 \u0641\u0642\u0637 \u0644\u0648 \u0641\u064a\u0647 \u0646\u0635
                   if (searchController.text.isNotEmpty)
                     GestureDetector(
                       onTap: () {
-                        /// \u2705 \u064a\u0645\u0633\u062d \u0627\u0644\u0646\u0635 \u0641\u0648\u0631\u064b\u0627
                         searchController.clear();
-
                         setLocalState(() {});
-
                         if (sourcesVM.sources.isEmpty) return;
                         final currentSource = sourcesVM.sources[0];
-
-                        /// \u2705 \u064a\u0631\u062c\u0651\u0639 \u0627\u0644\u0645\u0642\u0627\u0644\u0627\u062a \u0628\u062f\u0648\u0646 \u0641\u0644\u062a\u0631\u0629
                         Provider.of<ArticlesViewModel>(context, listen: false)
                             .loadArticles(currentSource);
                       },

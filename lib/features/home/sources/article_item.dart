@@ -18,7 +18,6 @@ class ArticleItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // \u0635\u0648\u0631\u0629 \u0627\u0644\u062e\u0628\u0631
           ClipRRect(
             borderRadius: BorderRadius.circular(16.r),
             child: CachedNetworkImage(
@@ -40,7 +39,6 @@ class ArticleItem extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
 
-          // \u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u062e\u0628\u0631
           Text(
             article.title ?? '',
             maxLines: 2,
@@ -53,7 +51,6 @@ class ArticleItem extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
 
-          // \u0627\u0644\u0643\u0627\u062a\u0628 \u0648 \u0627\u0644\u062a\u0627\u0631\u064a\u062e
           Row(
             children: [
               Expanded(
@@ -88,8 +85,6 @@ class ArticleItem extends StatelessWidget {
     );
   }
 
-  // *************** Bottom Sheet ***************
-
   void _showArticleDetailsBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -115,7 +110,6 @@ class ArticleItem extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // \u0635\u0648\u0631\u0629 \u062c\u0648\u0647 \u0627\u0644\u0640 bottom sheet
                     if (article.urlToImage != null &&
                         article.urlToImage!.isNotEmpty)
                       ClipRRect(
@@ -129,8 +123,6 @@ class ArticleItem extends StatelessWidget {
                       ),
 
                     SizedBox(height: 12.h),
-
-                    // \u0627\u0644\u0639\u0646\u0648\u0627\u0646
                     Text(
                       article.title ?? '',
                       style: GoogleFonts.inter(
@@ -139,10 +131,7 @@ class ArticleItem extends StatelessWidget {
                         fontSize: 16.sp,
                       ),
                     ),
-
                     SizedBox(height: 8.h),
-
-                    // \u0627\u0644\u0648\u0635\u0641 / \u0627\u0644\u0645\u062d\u062a\u0648\u0649
                     Text(
                       article.description ??
                           article.content ??
@@ -152,10 +141,7 @@ class ArticleItem extends StatelessWidget {
                         fontSize: 13.sp,
                       ),
                     ),
-
                     SizedBox(height: 16.h),
-
-                    // \u0632\u0631 View Full Article
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -200,14 +186,12 @@ class ArticleItem extends StatelessWidget {
     );
   }
 
-  // *************** Open in in-app browser ***************
-
   Future<void> _openArticleUrl(BuildContext context, String url) async {
     final Uri uri = Uri.parse(url);
 
     final bool launched = await launchUrl(
       uri,
-      mode: LaunchMode.inAppBrowserView, // \u064a\u0641\u062a\u062d \u0632\u064a \u0627\u0644\u0644\u064a \u0641\u064a \u0627\u0644\u0635\u0648\u0631\u0629
+      mode: LaunchMode.inAppBrowserView,
     );
 
     if (!launched) {
